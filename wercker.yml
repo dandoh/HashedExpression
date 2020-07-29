@@ -18,7 +18,9 @@ create-release:
     - script:
         name: Get symphony release version
         code: |
-          ls build
+          ls
+          echo "------------------"
+          ls ~
           export RELEASE_VERSION=$(cat VERSION)
     - wercker/github-create-release@2.1.1:
         token: $GITHUB_TOKEN
