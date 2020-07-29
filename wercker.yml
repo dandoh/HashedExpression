@@ -19,3 +19,4 @@ create-release:
     - wercker/github-create-release@2.1.1:
         token: $GITHUB_TOKEN
         tag: $SYMPHONY_RELEASE_VERSION
+
