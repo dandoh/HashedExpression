@@ -28,17 +28,17 @@ create-release:
     - install-packages:
         packages: curl file
     - script:
-        name: Get symphony release version
+        name: Get release version
         code: |
           export RELEASE_VERSION=$(cat VERSION)
     - script:
-        name: Tar gzip symphony
+        name: Create symphony archive
         code: |
           tar czf symphony-$RELEASE_VERSION.tar.gz --directory=bins symphony
     - wercker/github-create-release@2.1.1:
         token: $GITHUB_TOKEN
         tag: $RELEASE_VERSION
-        title: Bump version $RELEASE_VERSION
+        title: $RELEASE_VERSION
     - wercker/github-upload-asset@2.1.1:
         token: $GITHUB_TOKEN
         file: symphony-$RELEASE_VERSION.tar.gz
