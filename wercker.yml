@@ -7,8 +7,7 @@ build:
     - script:
         name: build & test
         code: |
-          echo "hello world"
-#          stack build --test --ghc-options -O2 --copy-bins --local-bin-path bins
+          stack build --test --ghc-options -O2 --copy-bins --local-bin-path bins
 
 
 create-release:
@@ -16,12 +15,6 @@ create-release:
   steps:
     - install-packages:
         packages: curl file
-    - script:
-        name: haha
-        code: |
-          touch helloworld.md
-          file helloworld.md
-          curl
     - script:
         name: Get symphony release version
         code: |
