@@ -7,7 +7,8 @@ build:
     - script:
         name: build & test
         code: |
-#          echo "hello world"
+          pwd
+          echo "hello world"
 #          stack build --test --ghc-options -O2
 
 
