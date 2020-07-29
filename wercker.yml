@@ -7,9 +7,19 @@ build:
   # https://devcenter.wercker.com/development/steps/
   steps:
     - script:
+        name: restore cache
+        code: |
+          if [ -e "$WERCKER_CACHE_DIR/.stack-work" ]; then
+            cp -r $WERCKER_CACHE_DIR/.stack-work .stack-work
+          fi
+    - script:
         name: build & test
         code: |
           stack build --test --ghc-options -O2 --copy-bins --local-bin-path bins
+    - script:
+        name: store cache
+        code: |
+          cp -r .stack-work $WERCKER_CACHE_DIR/.stack-work
 
 
 create-release:
