@@ -7,7 +7,7 @@ build:
     - script:
         name: build & test
         code: |
-          stack build --test ----ghc-options -O2 --copy-bins --local-bin-path bins
+          stack build --test --ghc-options -O2 --copy-bins --local-bin-path bins
 
 
 create-release:
