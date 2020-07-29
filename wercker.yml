@@ -7,20 +7,16 @@ build:
     - script:
         name: build & test
         code: |
-          pwd
-          echo "hello world"
-#          stack build --test --ghc-options -O2
+          stack build --test ----ghc-options -O2 --copy-bins --local-bin-path bins
 
 
 create-release:
-  box: alpine
+  box: ubuntu
   steps:
     - script:
         name: Get symphony release version
         code: |
-          ls
-          echo "------------------"
-          ls ~
+          ls bins
           export RELEASE_VERSION=$(cat VERSION)
     - wercker/github-create-release@2.1.1:
         token: $GITHUB_TOKEN
