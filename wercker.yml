@@ -7,18 +7,35 @@ build:
     - script:
         name: build & test
         code: |
-          stack build --test --ghc-options -O2 --copy-bins --local-bin-path bins
+          echo "hello world"
+#          stack build --test --ghc-options -O2 --copy-bins --local-bin-path bins
 
 
 create-release:
   box: ubuntu
   steps:
+    - install-packages:
+        packages: curl file
+    - script:
+        name: haha
+        code: |
+          touch helloworld.md
+          file helloworld.md
+          curl
     - script:
         name: Get symphony release version
         code: |
-          ls bins
           export RELEASE_VERSION=$(cat VERSION)
+    - script:
+        name: Tar gzip symphony
+        code: |
+          tar czf symphony-$RELEASE_VERSION.tar.gz --directory=bins symphony
     - wercker/github-create-release@2.1.1:
         token: $GITHUB_TOKEN
         tag: $RELEASE_VERSION
+        title: Bump version $RELEASE_VERSION
+    - wercker/github-upload-asset@2.1.1:
+        token: $GITHUB_TOKEN
+        file: symphony-$RELEASE_VERSION.tar.gz
+
 
